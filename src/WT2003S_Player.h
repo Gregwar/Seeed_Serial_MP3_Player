@@ -78,7 +78,7 @@
 
 #define WT2003S_MAX_VOLUME 0x1F
 #define WT2003S_MIN_VOLUME 0x00
-#define WT2003S_TIMEOUT 1000
+#define WT2003S_TIMEOUT 250
 typedef enum {
     SINGLE_SHOT    = 0x00,
     SINGLE_CYCLE   = 0x01,

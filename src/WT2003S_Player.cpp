@@ -73,7 +73,9 @@ again:
 
     time = millis();
     if (data == NULL) {
-        while (! _serial->available() && ((millis() - time) < WT2003S_TIMEOUT)) {}
+        while (! _serial->available() && ((millis() - time) < WT2003S_TIMEOUT)) {
+          vTaskDelay(1);
+        }
         return _serial->read();
     } else {
         time = millis();
@@ -83,13 +85,15 @@ again:
                     is_again = false;
                     break;
                 }
+            } else {
+              vTaskDelay(1);
             }
         }
         if (is_again) {
             if (++again_count == 5) {
                 return -1;
             }
-            Serial.println(String(commandBytes[0], HEX) + "again");
+            // Serial.println(String(commandBytes[0], HEX) + "again");
             goto again;
         }
         if (len > 9) {
